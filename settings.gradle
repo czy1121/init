@@ -1,0 +1,8 @@
+
+rootProject.name = "init"
+
+include ':app'
+include ':init'
+include ':init-annotation'
+include ':init-compiler'
+include ':init-startup'

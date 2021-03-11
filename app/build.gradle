@@ -1,0 +1,10 @@
+
+apply from: "https://gitee.com/ezy/gradle/raw/master/build-library-app.gradle"
+
+
+
+dependencies {
+
+    implementation project(":init-startup")
+    kapt project(":init-compiler")
+}

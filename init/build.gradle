@@ -1,0 +1,9 @@
+
+
+apply from: "https://gitee.com/ezy/gradle/raw/master/build-library-android-publish.gradle"
+
+
+dependencies {
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    api  project(':init-annotation')
+}

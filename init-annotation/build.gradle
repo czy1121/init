@@ -1,0 +1,2 @@
+
+apply from: "https://gitee.com/ezy/gradle/raw/master/build-library-kotlin.gradle"

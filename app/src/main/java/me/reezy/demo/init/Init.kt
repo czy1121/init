@@ -1,0 +1,67 @@
+package me.reezy.demo.init
+
+import android.app.Application
+import android.util.Log
+import me.reezy.init.InitTask
+import me.reezy.init.annotation.Init
+
+const val TAG = "me.reezy.init"
+
+@Init(priority = 20)
+class AlphaInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+
+@Init(background = true, process = "main", priority = 20)
+class BetaInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+
+@Init(background = true, process = "main", priority = 10)
+class GammaInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+
+@Init(priority = 40)
+class DeltaInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+@Init(priority = 10, depends = ["DeltaInit", "OneInit"])
+class FourInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+@Init(priority = 10)
+class OneInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+
+@Init(priority = 10, background = true)
+class TwoInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
+
+@Init
+class ThreeInit : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
+    }
+}
