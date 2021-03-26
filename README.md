@@ -20,12 +20,12 @@ repositories {
     maven { url "https://gitee.com/ezy/repo/raw/android_public/"}
 } 
 dependencies {
-    implementation "me.reezy.init:init:0.9.0" 
-    kapt "me.reezy.init:init-compiler:0.9.0" 
+    implementation "me.reezy.init:init:0.9.1" 
+    kapt "me.reezy.init:init-compiler:0.9.1" 
 
     // 使用 init-startup 代替 init 可以利用 Jetpack Startup 库自动初始化
     // 无需在 Application.onCreate 调用 InitManager.init()
-    implementation "me.reezy.init:init-startup:0.9.0" 
+    implementation "me.reezy.init:init-startup:0.9.1" 
 }
 ```
  

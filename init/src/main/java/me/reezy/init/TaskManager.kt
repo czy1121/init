@@ -42,7 +42,9 @@ class TaskManager(private val taskList: TaskList, triggers: Set<String> = setOf(
         }
 
         // 无依赖的异步任务，在子线程并行执行
-        aloneTasks.asFlow().onEach(this::execute).launchIn(GlobalScope)
+        aloneTasks.forEach {
+            flowOf(it).onEach(this::execute).launchIn(GlobalScope)
+        }
 
         // 无依赖的同步任务，在主线程顺序执行
         if (Looper.getMainLooper() === Looper.myLooper()) {

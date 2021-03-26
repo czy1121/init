@@ -65,3 +65,55 @@ class ThreeInit : InitTask {
         Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name}")
     }
 }
+
+
+
+@Init(background = true)
+class Alone1 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
+
+@Init(background = true)
+class Alone2 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
+@Init(background = true)
+class Alone3 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
+@Init(background = true)
+class Alone4 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
+@Init(background = true)
+class Alone5 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
+@Init(background = true)
+class Alone6 : InitTask {
+    override fun execute(app: Application) {
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} started")
+        Thread.sleep(5000)
+        Log.e(TAG, "this is ${javaClass.simpleName} in ${Thread.currentThread().name} done")
+    }
+}
