@@ -2,6 +2,7 @@ package com.demo.app
 
 import android.app.Application
 import android.util.Log
+import me.reezy.cosmo.init.InitManager
 import me.reezy.cosmo.init.InitTask
 import me.reezy.cosmo.init.annotation.Init
 import me.reezy.cosmo.init.dag.TaskInterface

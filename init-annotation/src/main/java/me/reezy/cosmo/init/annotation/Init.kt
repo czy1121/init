@@ -9,7 +9,6 @@ annotation class Init(
     val background: Boolean = false,    // 是否在工作线程执行任务
     val manual: Boolean = false,        // 是否需要手动完成
     val debugOnly: Boolean = false,     // 是否仅在 DEBUG 模式执行任务
-    val compliance: Boolean = false,    // 是否需要合规执行
     val depends: Array<String> = [],    // 依赖的任务列表
     val priority: Short = 0,
 )

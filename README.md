@@ -58,8 +58,7 @@ annotation class Init(
     val leading: Boolean = false,       // 是否前置任务，前置任务全部执行完成后才开始调度其它任务
     val background: Boolean = false,    // 是否在工作线程执行任务
     val manual: Boolean = false,        // 是否需要手动完成
-    val debugOnly: Boolean = false,     // 是否仅在 DEBUG 模式执行任务
-    val compliance: Boolean = false,    // 是否需要合规执行
+    val debugOnly: Boolean = false,     // 是否仅在 DEBUG 模式执行任务 
     val depends: Array<String> = [],    // 依赖的任务列表
     val priority: Short = 0,
 )
@@ -97,7 +96,7 @@ class Task(
 InitManager.launch(app, debugMode) {
   add("task1") {
   }
-  add("task2", depends = setOf(InitManager.COMPLIANCE)) {
+  add("task2", depends = setOf(InitManager.USER_GRANTED)) {
   }
   add("task3", depends = setOf("task1")) {
   }

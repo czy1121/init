@@ -74,7 +74,7 @@ class InitProcessor(
                             an.manual,
                             an.debugOnly,
                             an.priority,
-                            an.depends.format(an.compliance)
+                            an.depends.format()
                         )
                     } else {
                         logger.warn("Skip $type")
@@ -95,10 +95,8 @@ class InitProcessor(
         fileSpec.writeFile(codeGenerator)
     }
 
-    private fun Array<String>.format(compliance: Boolean): String {
-        val depends = if (compliance) this + ":compliance" else this
-        if (depends.isEmpty()) return "setOf()"
-        return depends.joinToString("\",\"", "setOf(\"", "\")") {
+    private fun Array<String>.format(): String {
+        return if (isEmpty()) "setOf()" else joinToString("\",\"", "setOf(\"", "\")") {
             if (it.contains(":")) it else "$moduleName:$it"
         }
     }

@@ -9,19 +9,19 @@ import me.reezy.cosmo.init.dag.TaskList
 import java.io.File
 
 object InitManager {
-    const val COMPLIANCE = ":compliance"
+    const val USER_GRANTED = ":user-granted"
 
-    var compliance: Boolean = false
+    var isUserGranted: Boolean = false
         set(value) {
             if (value && !field) {
                 field = true
-                complianceRunnable?.run()
-                complianceRunnable = null
+                onUserGranted?.run()
+                onUserGranted = null
 
             }
         }
 
-    private var complianceRunnable: Runnable? = null
+    private var onUserGranted: Runnable? = null
 
     fun launch(app: Application, debugMode: Boolean, generatedPackageName: String = app.packageName, modules: List<String> = listOf(), block: TaskList.() -> Unit = {}) {
 
@@ -29,18 +29,18 @@ object InitManager {
 
         val tasks = TaskList(app.packageName, processName, debugMode).apply(block).collect(app, generatedPackageName, modules).items
 
-        val dag = TaskDag.launch(tasks, setOf(COMPLIANCE))
+        val dag = TaskDag.launch(tasks, setOf(USER_GRANTED))
 
 
-        val file = File(app.filesDir, "init-compliance")
+        val file = File(app.filesDir, "init-user-granted")
 
-        compliance = file.exists()
+        isUserGranted = file.exists()
 
-        if (compliance) {
-            dag.finish(COMPLIANCE)
+        if (isUserGranted) {
+            dag.finish(USER_GRANTED)
         } else {
-            complianceRunnable = Runnable {
-                dag.finish(COMPLIANCE)
+            onUserGranted = Runnable {
+                dag.finish(USER_GRANTED)
 
                 file.createNewFile()
             }
