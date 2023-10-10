@@ -31,11 +31,31 @@ dependencies {
 
 ## 使用
 
-在 `AndroidManifest.xml` 的 `<application>` 里添加模块
+模块配置
 
-```xml 
-<meta-data android:name="modules" android:value="app" />
-``` 
+```groovy
+apply plugin: 'com.google.devtools.ksp'
+
+ksp {
+    arg("moduleName", "YOUR_MODULE_NAME")
+    arg("packageName", "GENERATED_PACKAGE_NAME")
+}
+```
+
+简单使用
+
+```kotlin 
+InitManager.launch(app, debugMode, generatedPackageName, modules) {
+    add("task1") {
+    }
+    add("task2", depends = setOf(InitManager.USER_GRANTED)) {
+    }
+    add("task3", depends = setOf("task1")) {
+    }
+}  
+ 
+```
+ 
 
 通过注解 `@Init` 和 `InitTask` 接口定义一个任务  
 
@@ -91,18 +111,6 @@ class Task(
  
  
 
-```kotlin
-
-InitManager.launch(app, debugMode) {
-  add("task1") {
-  }
-  add("task2", depends = setOf(InitManager.USER_GRANTED)) {
-  }
-  add("task3", depends = setOf("task1")) {
-  }
-}  
- 
-```
 
 
 ## LICENSE
