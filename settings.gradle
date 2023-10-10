@@ -1,8 +1,31 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven { url cosmoRepoPath }
+        google()
+        mavenCentral()
+    }
+    versionCatalogs {
+        libs {
+            from files("$buildGradlePath/versions-basic.toml")
+        }
+    }
+}
 
 rootProject.name = "init"
 
 include ':app'
 include ':init'
 include ':init-annotation'
-include ':init-compiler'
+include ':init-ksp'
 include ':init-startup'
+include ':init-dag'

@@ -1,9 +1,9 @@
+
+
 apply from: "$buildGradlePath/build-library-android.gradle"
 
 
 dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-//    api "me.reezy.cosmo:mmkv:0.7.0"
-    api project(':init-annotation')
-    api project(':init-dag')
+    implementation 'androidx.annotation:annotation:1.5.0'
 }

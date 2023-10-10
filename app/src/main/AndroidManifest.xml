@@ -13,9 +13,10 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.demo.app.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Init.NoActionBar">
+            android:theme="@style/Theme.Init.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

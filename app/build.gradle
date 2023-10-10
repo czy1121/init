@@ -1,10 +1,16 @@
 
-apply from: "https://gitee.com/ezy/gradle/raw/master/build-library-app.gradle"
+apply from: "$buildGradlePath/build-demo.gradle"
 
+apply plugin: "com.google.devtools.ksp"
 
+ksp {
+    arg("moduleName", name.replace(":module:", ""))
+    arg("packageName", "com.demo.init")
+}
 
 dependencies {
 
-    implementation project(":init-startup")
-    kapt project(":init-compiler")
+    implementation project(":init")
+    implementation project(path: ':init-annotation')
+    ksp project(':init-ksp')
 }

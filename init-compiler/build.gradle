@@ -1,6 +1,0 @@
-
-apply from: "https://gitee.com/ezy/gradle/raw/master/build-library-kapt.gradle"
-
-dependencies {
-    api project(':init-annotation')
-}
