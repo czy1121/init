@@ -10,7 +10,7 @@ class TaskList(
 
     val items: List<Task> = mItems
 
-    fun add(name: String, process: String = "all", leading: Boolean = false, background: Boolean = false, manual: Boolean = false, debugOnly: Boolean = false, priority: Int = 0, depends: Set<String> = setOf(), block: (TaskInterface) -> Unit) {
+    fun add(name: String, process: String = "main", leading: Boolean = false, background: Boolean = false, manual: Boolean = false, debugOnly: Boolean = false, priority: Int = 0, depends: Set<String> = setOf(), block: (TaskInterface) -> Unit) {
         if (debugOnly && !isDebuggable) {
             TaskDag.log("===> $name SKIPPED : debug only")
             return
