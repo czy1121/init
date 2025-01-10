@@ -66,12 +66,12 @@ class InitProcessor(
                         logger.warn("Found $type")
 
                         funcSpec.addStatement(
-                            "l.add(%T::class.java, %S, %L, %L, %L, %L, %L, %L)",
+                            "l.add(%T::class.java, \"%T\", %S, %L, %L, %L, %L, %L)",
+                            type.toTypeName(),
                             type.toTypeName(),
                             an.process,
-                            an.leading,
-                            an.background,
-                            an.manual,
+                            an.delay,
+                            an.main,
                             an.debugOnly,
                             an.priority,
                             an.depends.format()

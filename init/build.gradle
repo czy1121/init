@@ -3,5 +3,6 @@ apply from: "$buildGradlePath/build-library-android.gradle"
 
 dependencies {
     api project(':init-annotation')
-    api project(':init-dag')
+
+    implementation libs.androidx.annotation
 }

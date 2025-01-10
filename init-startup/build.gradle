@@ -1,9 +1,0 @@
-
-
-apply from: "$buildGradlePath/build-library-android.gradle"
-
-
-dependencies {
-    implementation "androidx.startup:startup-runtime:1.1.1"
-    implementation  project(':init')
-}

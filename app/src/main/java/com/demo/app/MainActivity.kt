@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        InitManager.launch(application, false, modules = listOf("app"))
+        InitManager.launch(application, true, modules = listOf("app")) {
+//            add()
+        }
     }
 }

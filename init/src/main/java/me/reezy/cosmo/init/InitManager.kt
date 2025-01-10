@@ -4,8 +4,8 @@ import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
 import android.os.Process
-import me.reezy.cosmo.init.dag.TaskDag
-import me.reezy.cosmo.init.dag.TaskList
+import me.reezy.cosmo.init.task.TaskDag
+import me.reezy.cosmo.init.task.TaskCollector
 import java.io.File
 
 object InitManager {
@@ -23,11 +23,13 @@ object InitManager {
 
     private var onUserGranted: Runnable? = null
 
-    fun launch(app: Application, debugMode: Boolean, generatedPackageName: String = app.packageName, modules: List<String> = listOf(), block: TaskList.() -> Unit = {}) {
+    fun launch(app: Application, debugMode: Boolean, generatedPackageName: String = app.packageName, modules: List<String> = listOf(), dsl: TaskCollector.() -> Unit = {}) {
 
-        val processName = app.resolveCurrentProcessName() ?: ""
+        currentProcessName = app.resolveCurrentProcessName() ?: ""
+        isDebugMode = debugMode
 
-        val tasks = TaskList(app.packageName, processName, debugMode).apply(block).collect(app, generatedPackageName, modules).items
+
+        val tasks = TaskCollector(app.packageName, currentProcessName, debugMode).apply(dsl).collect(app, generatedPackageName, modules).items
 
         val dag = TaskDag.launch(tasks, setOf(USER_GRANTED))
 
@@ -47,18 +49,18 @@ object InitManager {
         }
     }
 
-    private fun TaskList.collect(app: Application, generatedPackageName: String, modules: List<String>): TaskList {
+    private fun TaskCollector.collect(app: Application, generatedPackageName: String, modules: List<String>): TaskCollector {
         modules.map { it.replace("[^0-9a-zA-Z_]+".toRegex(), "") }.forEachIndexed { index, it ->
             try {
                 val loaderClass = Class.forName("$generatedPackageName.generated.InitLoader_$it")
                 val loaderMethod = loaderClass.getMethod("load", InitTaskCollector::class.java)
 
-                val collector = InitTaskCollector(app, this, it, index)
+                val collector = InitTaskCollector(this, app, it, index)
                 loaderMethod.invoke(loaderClass.newInstance(), collector)
             } catch (e: ClassNotFoundException) {
-                TaskDag.log("There is no Loader in module: $it.")
+                log("There is no Loader in module: $it.")
             } catch (e: Throwable) {
-                TaskDag.log(e.message!!)
+                log(e.message!!)
                 e.printStackTrace()
             }
         }
